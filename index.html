@@ -6,14 +6,14 @@
 <style>
 :root{--ink:#14102a;--dusk:#4a4fb0;--lilac:#8a7fe8;--coral:#ff6b6b;--amber:#ff9a5a;--sign:#f5c842;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{overflow:hidden;width:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--ink);color:#ffe9d6;font:11px/1.9 "Press Start 2P",ui-monospace,Menlo,monospace;height:100dvh;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+body{margin:0;background:var(--ink);color:#ffe9d6;font:11px/1.9 "Press Start 2P",ui-monospace,Menlo,monospace;height:100dvh;width:100%;position:fixed;inset:0;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;-webkit-user-select:none;user-select:none}
 #bar{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));left:10px;z-index:6;display:flex;gap:6px;align-items:center;min-height:22px}
 #bar i{width:14px;height:14px;background:#241d4a;border:2px solid var(--dusk)}
 #bar i.on{background:var(--amber);border-color:var(--sign)}
 #bar button{margin-left:8px}
-.stage{position:fixed;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center}#bgb{position:absolute;inset:-20px;width:calc(100% + 40px);height:calc(100% + 40px);object-fit:cover;filter:blur(14px) brightness(.55)}.pic{position:relative;width:min(100vw,calc(100dvh*578/805));aspect-ratio:578/805;flex:none}
+.stage{position:fixed;inset:0;contain:paint;clip-path:inset(0);overflow:hidden;display:flex;align-items:center;justify-content:center}#bgb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(10px) brightness(.55)}.pic{position:relative;width:min(100%,calc(100dvh*578/805));aspect-ratio:578/805;flex:none}
 .pic img{width:100%;height:100%;display:block;image-rendering:pixelated}
 .pic:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(20,16,42,.18) 0 1px,transparent 1px 3px)}
 .hs{position:absolute;background:none;border:0;cursor:pointer;z-index:2;padding:0}
@@ -72,5 +72,5 @@ for(const k in H){const d=H[k],b=document.createElement("button");b.className="h
   found.add(k);b.classList.add("seen");bar_();say(d.l,found.size==5?()=>say(["That might be enough to name a theory. Or keep looking."]):null)};
  document.querySelector(".pic").append(b)}
 $("go").onclick=()=>{try{document.documentElement.requestFullscreen?.().catch(()=>{})}catch(e){}$("title").style.display="none";say(["17:52. You’re walking home along the usual street.","The sky is on fire, and it has been for three hours.","Tap the glowing diamonds. Find out why."])};
-bar_();$("bgb").src=document.querySelector(".pic img").src;
+function fit(){const p=document.querySelector(".pic");p.style.width=Math.min(document.documentElement.clientWidth,innerHeight*578/805)+"px"}fit();addEventListener("resize",fit);bar_();$("bgb").src=document.querySelector(".pic img").src;
 </script></body></html>
